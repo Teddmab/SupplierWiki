@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 import '../styles/LoginForm.css';
 
 const LoginForm = () => {
+    const navigate = useNavigate();
     // Add useState to keep track of the username and password
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -32,6 +34,7 @@ const LoginForm = () => {
         }
     };
 
+    const { login } = useAuth(); // add this line to use the login function from context
 
     // Sending Login Request
     const handleLogin = async () => {
@@ -42,18 +45,25 @@ const LoginForm = () => {
             },
             body: JSON.stringify({ username, password }),
         });
-        const history = useHistory();
+        
 
         if (response.ok) {
             const data = await response.json();
             // Handle successful login here
             console.log('Login successful', data);
-            history.push('/form'); // Redirect to the form page
+
+            // localStorage.setItem('token', data.token); // Store the token
+            
+            login(data); // Save the login data using context
+
+            // history.push('/form'); // Redirect to the form page
+            navigate('/form');
         } else {
             // Handle errors here
             setValidationMessage('Invalid username or password');
         }
     };
+
 
     return (
         <div className="login-form">
