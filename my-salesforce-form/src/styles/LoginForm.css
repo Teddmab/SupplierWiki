@@ -1,0 +1,12 @@
+.login-form {
+    max-width: 300px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.login-form input {
+    margin: 10px 0;
+    width: 100%;
+    padding: 8px;
+}
