@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import '../styles/LoginForm.css';
 
 const LoginForm = () => {
@@ -26,6 +28,30 @@ const LoginForm = () => {
         if (validateForm()) {
             // If the form is valid, you can proceed to send data to the backend
             console.log('Form is valid, send data to backend');
+            handleLogin();
+        }
+    };
+
+
+    // Sending Login Request
+    const handleLogin = async () => {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        });
+        const history = useHistory();
+
+        if (response.ok) {
+            const data = await response.json();
+            // Handle successful login here
+            console.log('Login successful', data);
+            history.push('/form'); // Redirect to the form page
+        } else {
+            // Handle errors here
+            setValidationMessage('Invalid username or password');
         }
     };
 
