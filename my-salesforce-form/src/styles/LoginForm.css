@@ -10,3 +10,10 @@
     width: 100%;
     padding: 8px;
 }
+
+
+.validation-message {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
