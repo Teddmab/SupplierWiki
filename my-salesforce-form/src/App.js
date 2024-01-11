@@ -9,6 +9,7 @@ import {
   Route
 } from 'react-router-dom';
 import './App.css';
+import SupplierWiki from './components/SupplierWiki';
 
 // A dummy component to represent your protected form page
 const FormPage = () => {
@@ -25,7 +26,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/form" element={
             <ProtectedRoute>
-              <FormPage /> {/* This is a placeholder for your form component */}
+              <SupplierWiki /> {/* This is a placeholder for your form component */}
             </ProtectedRoute>
           } />
           {/* Add more protected routes as needed */}

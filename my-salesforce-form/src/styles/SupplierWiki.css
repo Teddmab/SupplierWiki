@@ -1,0 +1,122 @@
+.form-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+    font-family: 'Roboto', sans-serif;
+}
+
+.form-header {
+    margin-bottom: 2rem;
+    color: #333;
+    font-size: 1.75rem;
+    text-align: center;
+}
+
+.form-section {
+    padding: 20px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label,
+.form-label-checkbox {
+    display: block;
+    margin-bottom: .5rem;
+    color: #8291a1;
+}
+
+.form-select,
+.form-control {
+    width: 100%;
+    padding: 10px 15px; /* Adjust padding to match the select element */
+    margin-bottom: 0.5rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+
+.form-textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.form-checkbox {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Custom checkbox styles */
+.form-checkbox + label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 25px;
+}
+
+.form-checkbox + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #9c9c9c;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+.form-checkbox:checked + label:after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 9px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    background-color: #0056b3;
+}
+
+.form-group-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+
+.form-submit {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #0056b3;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.form-submit:hover,
+.form-submit:focus {
+    background-color: #00397a;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-container {
+        padding: 1rem;
+    }
+
+    .form-header {
+        font-size: 1.5rem;
+    }
+}
