@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 5001;
 
 // Mock database
 const supplierData = [
+    { username: 'admin', password: 'admin', supplier: 'Test Account Alea', product: ['Product 2 -Alea', 'Product 3 - Alea', 'Product. 1 Test Account Alea', 'Final Product - Alea'], accountID: '001JW000007G26hYAC' },
     { username: 'user1', password: 'Password1', supplier: '7Mojos', product: ['7Mojos'], accountID: '001JW000007G26hYAC' },
     { username: 'user2', password: 'Password2', supplier: 'AirDice', product: ['Air Dice'], accountID: '001JW000007G26hYAC' },
     { username: 'user3', password: 'Password3', supplier: 'Apparat Gaming', product: ['Apparat Gaming'], accountID: '001JW000007G26hYAC' },
@@ -62,7 +63,7 @@ app.post('/login', async (req, res) => { // Make sure this is an async function
             // Use the access token to make a query to the Salesforce API
             console.log('SF_INSTANCE_URL:', process.env.SF_INSTANCE_URL)
 
-            const queryString = encodeURI(`SELECT Name, Min_Max_bet__c, Language__c, PACGOR_license__c, new_license__c, Client_Area_URL__c, Marketing_Material__c, URL_for_game_certificate__c, Top_5_market__c, Direct_communication_with_Hub88__c, top_5_games__c, Supported_Currencies__c, Max_Exposure__c, Blue_Dollar_Supported__c, External_ID__c  FROM Supplier_Wiki__c WHERE Account__c = '${user.accountID}'`);
+            const queryString = encodeURI(`SELECT Name, Min_Max_bet__c, Language__c, PACGOR_license__c, new_license__c, Client_Area_URL__c, Marketing_Material__c, URL_for_game_certificate__c, Top_5_market__c, Direct_communication_with_Hub88__c, top_5_games__c, Supported_Currencies__c, Max_Exposure__c, Blue_Dollar_Supported__c, External_ID__c, Supplier_Products__r.Name  FROM Supplier_Wiki__c WHERE Account__c = '${user.accountID}'`);
             const sfResponse = await fetch(`${process.env.SF_INSTANCE_URL}/services/data/v52.0/query/?q=${queryString}`, {
                 method: 'GET',
                 headers: {
@@ -75,7 +76,7 @@ app.post('/login', async (req, res) => { // Make sure this is an async function
             const sfData = await sfResponse.json();
 
             // Prepare the response data with the Supplier_Wiki__c data if it exists
-            const supplierWikiData = sfData.records && sfData.records.length > 0 ? sfData.records[0] : null;
+            const supplierWikiData = sfData.records && sfData.records.length > 0 ? sfData.records : null;
 
             // Return supplier and product along with the token
             res.json({ 
